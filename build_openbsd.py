@@ -231,8 +231,10 @@ def build_and_install_userland(cpus):
 def build_release(release_base, site_base, force, interactive):
     """Build release set of installable OpenBSD files."""
 
+    log_build_action("Check if dest dir is noperm")
+    run_command("/sbin/mount | grep -q '%s .*noperm'" % os.environ['DESTDIR'])
     log_build_action("Clearing out old build and release directories.")
-    run_command("/bin/rm -rf %s" % os.environ['DESTDIR'])
+    run_command("/bin/rm -rf %s/*" % os.environ['DESTDIR'])
     run_command("/bin/rm -rf %s" % os.environ['RELEASEDIR'])
     log_build_action("Creating clean build and release directories.")
     run_command("/bin/mkdir -p %s" % os.environ['DESTDIR'])

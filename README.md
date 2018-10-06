@@ -25,7 +25,7 @@ These commands are all expected to be run as root, our via Sudo.
 
 #### Updating local CVS checkout
 
-    # ./build-openbsd.py --updatecvs
+    # ./build-openbsd.py --update_cvs
     ...
     ---------- Actions Attempted
     2012-04-22 11:36:07.324283 Build started.

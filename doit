@@ -1,0 +1,8 @@
+# doas ./build_openbsd.py --update_cvs --cvs_tag OPENBSD_6_3
+date >>timestamp
+doas ./build_openbsd.py --build kernel --build userland --build release --update_cvs --kernel GENERIC.MP --cvs_tag OPENBSD_6_3
+date >>timestamp
+
+#doas ./build_openbsd.py --build kernel --update_cvs --kernel GENERIC.MP --cvs_tag OPENBSD_6_3
+#doas ./build_openbsd.py --build userland --update_cvs --cvs_tag OPENBSD_6_3
+#doas ./build_openbsd.py --build release --update_cvs --cvs_tag OPENBSD_6_3
