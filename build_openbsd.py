@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 """Wrapper for updating, building, and creating OpenBSD releases."""
 
 import argparse
@@ -26,6 +26,13 @@ class RunCommandError(Exception):
     """Exception class to handle errors when a shell command is run."""
     pass
 
+
+def get_group_names():
+    """Return Group-Names """
+    """Build-User should not be root, should be in Group wsrc"""
+    """user mod -G wsrc exampleuser"""
+    group_names = run_command("/usr/bin/id -n -G", return_output=True).split(" ")
+    return group_names
 
 def get_kernel_name():
     """Return the currently-running kernel name and build number."""
@@ -69,7 +76,7 @@ def parse_args():
                         default=get_cpu_count(),
                         help="Number of CPU threads to pass to make. Auto-detected.")
     parser.add_argument("--cvs_tag",
-                        help="Tag to checkout/update. Example: OPENBSD_5_5",
+                        help="Tag to checkout/update. Example: OPENBSD_6_4",
                         default="HEAD")
     parser.add_argument("--cvs_server",
                         default="obsdacvs.cs.toronto.edu",
@@ -321,6 +328,7 @@ def main():
     args = parse_args()
     os.unsetenv("DESTDIR")
     os.unsetenv("RELEASEDIR")
+
 
     log_build_action("Command line args: %s" % args)
     log_build_action("Build started.")
